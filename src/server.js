@@ -1,11 +1,16 @@
-const express = require("express");
+import express from "express";
+import userRoutes from "./route/user.js";
+import postRoutes from "./route/post.js";
+
 const app = express();
-const port = 3000;
+const PORT = 3000;
 
-app.get("/", (req, res) => {
-  res.send("Olá Mundo!");
-});
+app.use(express.json());
 
-app.listen(port, () => {
-  console.log(`App de exemplo esta rodando na porta ${port}`);
+// Usa as rotas do user
+app.use("/api", userRoutes);
+app.use("/api", postRoutes);
+
+app.listen(PORT, () => {
+  console.log(`Server running at http://localhost:${PORT}`);
 });
